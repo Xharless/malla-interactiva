@@ -34,15 +34,7 @@ const prerequisitos = {
   obst024: ['obst019', 'obst020', 'obst021', 'obst022']
 };
 
-const correquisitos = {
-  obst008: ['obst007', 'spab112'],
-  spab112: ['obst008'],
-  obst013: ['obst015'],
-  obst015: ['obst013'],
-  obst016: ['obst018'],
-  obst017: ['obst018'],
-  obst018: ['obst016', 'obst017']
-};
+
 
 
 // Funciones para guardar y cargar progreso en localStorage
@@ -58,43 +50,27 @@ function guardarAprobados(aprobados) {
 function actualizarDesbloqueos() {
   const aprobados = obtenerAprobados();
 
-  const ramos = Array.from(document.querySelectorAll('.ramo'));
-  const desbloqueables = new Set();
-
-  // Primera pasada: prerrequisitos cumplidos
   for (const [ramo, prereqs] of Object.entries(prerequisitos)) {
     const elem = document.getElementById(ramo);
     if (!elem) continue;
 
     const prereqCumplido = prereqs.every(r => aprobados.includes(r));
-    if (prereqCumplido) desbloqueables.add(ramo);
-  }
-
-  // Segunda pasada: considerar correquisitos para los que pasaron prerequisitos
-  for (const ramo of desbloqueables) {
-    const elem = document.getElementById(ramo);
-    if (!elem || elem.classList.contains('aprobado')) {
-      elem?.classList.remove('bloqueado');
-      continue;
-    }
 
     const correqs = correquisitos[ramo] || [];
-    const correqCumplido = correqs.every(r => {
-      const elemCorreq = document.getElementById(r);
-      return aprobados.includes(r) || desbloqueables.has(r) || !elemCorreq?.classList.contains('bloqueado');
-    });
+    const correqCumplido = correqs.every(r =>
+      aprobados.includes(r) || !document.getElementById(r)?.classList.contains('bloqueado')
+    );
 
-    if (correqCumplido) {
-      elem.classList.remove('bloqueado');
+    const puedeDesbloquear = prereqCumplido && correqCumplido;
+
+    if (!elem.classList.contains('aprobado')) {
+      if (puedeDesbloquear) {
+        elem.classList.remove('bloqueado');
+      } else {
+        elem.classList.add('bloqueado');
+      }
     } else {
-      elem.classList.add('bloqueado');
-    }
-  }
-
-  // Si está aprobado, siempre debe estar desbloqueado
-  for (const ramo of ramos) {
-    if (ramo.classList.contains('aprobado')) {
-      ramo.classList.remove('bloqueado');
+      elem.classList.remove('bloqueado');
     }
   }
 }
