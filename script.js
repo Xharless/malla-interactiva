@@ -34,7 +34,15 @@ const prerequisitos = {
   obst024: ['obst019', 'obst020', 'obst021', 'obst022']
 };
 
-
+const correquisitos = {
+  obst008: ['obst007', 'spab112'],
+  spab112: ['obst008'],
+  obst013: ['obst015'],
+  obst015: ['obst013'],
+  obst016: ['obst018'],
+  obst017: ['obst018'],
+  obst018: ['obst016', 'obst017']
+};
 
 
 // Funciones para guardar y cargar progreso en localStorage
