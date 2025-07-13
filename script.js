@@ -30,8 +30,10 @@ const prerequisitos = {
   obst020: ['spab303', 'obst013', 'obst014', 'obst016', 'obst017', 'obst018'],
   obst021: ['spab303', 'obst013', 'obst014', 'obst016', 'obst017', 'obst018'],
   obst022: ['spab303'],
-  obst023: ['obst019', 'obst020', 'obst021', 'obst022'],
-  obst024: ['obst019', 'obst020', 'obst021', 'obst022']
+  obst023_1: ['obst019', 'obst020', 'obst021', 'obst022'],
+  obst024_1: ['obst019', 'obst020', 'obst021', 'obst022'],
+  obst023_2: ['obst023_1'],
+  obst024_2: ['obst024_1'],
 };
 
 const correquisitos = {
