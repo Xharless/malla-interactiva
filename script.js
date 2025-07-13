@@ -11,22 +11,22 @@ const prerequisitos = {
   cegpc13: [],
   ing239: ['ing129'],
   obst007: ['obst004'],
-  obst008: ['obst005', 'obst006'], // Correquisitos: obst007, spab112
-  spab112: ['spab113'],            // Correquisito: obst008
+  obst008: ['obst005', 'obst006'],
+  spab112: ['spab113'],
   obst009: ['obst004', 'obst005', 'obst006', 'ing239'],
   ing249: ['ing239'],
   farm151: ['biol130', 'quim075'],
-  obst010: ['spab112', 'obst004', 'obst006'], // Correquisito: farm151
-  obst011: ['obst008', 'obst007'],            // Correquisito: farm151
+  obst010: ['spab112', 'obst004', 'obst006'],
+  obst011: ['obst008', 'obst007'],
   obst012: ['obst006'],
-  obst013: ['obst006', 'obst008', 'obst010'], // Correquisito: obst015
+  obst013: ['obst006', 'obst008', 'obst010'],
   obst014: ['obst010', 'obst011', 'farm151'],
   spab300: ['spab112'],
-  obst015: ['obst006', 'obst008', 'obst010'], // Correquisito: obst013
+  obst015: ['obst006', 'obst008', 'obst010'],
   spab303: ['spab300', 'obst006'],
-  obst016: ['obst011'],                      // Correquisito: obst018
-  obst017: ['obst012', 'obst015'],           // Correquisito: obst018
-  obst018: ['obst006', 'obst007'],           // Correquisitos: obst016, obst017
+  obst016: ['obst011'],
+  obst017: ['obst012', 'obst015'],
+  obst018: ['obst006', 'obst007'],
   obst019: ['spab303', 'obst013', 'obst014', 'obst016', 'obst017', 'obst018'],
   obst020: ['spab303', 'obst013', 'obst014', 'obst016', 'obst017', 'obst018'],
   obst021: ['spab303', 'obst013', 'obst014', 'obst016', 'obst017', 'obst018'],
@@ -34,6 +34,7 @@ const prerequisitos = {
   obst023: ['obst019', 'obst020', 'obst021', 'obst022'],
   obst024: ['obst019', 'obst020', 'obst021', 'obst022']
 };
+
 
 const correquisitos = {
   obst008: ['obst007', 'spab112'],
