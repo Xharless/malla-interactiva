@@ -1,4 +1,3 @@
-
 const prerequisitos = {
   morfo17: [],
   spab113: [],
@@ -35,20 +34,6 @@ const prerequisitos = {
   obst024: ['obst019', 'obst020', 'obst021', 'obst022']
 };
 
-
-const correquisitos = {
-  obst008: ['obst007', 'spab112'],
-  spab112: ['obst008'],
-  obst010: ['farm151'],
-  obst011: ['farm151'],
-  obst013: ['obst015'],
-  obst015: ['obst013'],
-  obst016: ['obst018'],
-  obst017: ['obst018'],
-  obst018: ['obst016', 'obst017']
-};
-
-
 // Funciones para guardar y cargar progreso en localStorage
 function obtenerAprobados() {
   const data = localStorage.getItem('mallaAprobados');
@@ -59,40 +44,20 @@ function guardarAprobados(aprobados) {
   localStorage.setItem('mallaAprobados', JSON.stringify(aprobados));
 }
 
-// Calcula el total de créditos de ramos aprobados
-function calcularCreditosAprobados() {
-  const aprobados = obtenerAprobados();
-  return aprobados.reduce((sum, ramo) => sum + (creditos[ramo] || 0), 0);
-}
-
-// Actualiza qué ramos están desbloqueados o bloqueados según prerrequisitos y créditos especiales
+// Actualiza qué ramos están desbloqueados o bloqueados según prerrequisitos
 function actualizarDesbloqueos() {
   const aprobados = obtenerAprobados();
-  const totalCreditos = calcularCreditosAprobados();
 
   for (const [destino, reqs] of Object.entries(prerequisitos)) {
     const elem = document.getElementById(destino);
     if (!elem) continue;
 
-    // Verificar si se cumplen prerrequisitos normales
-    let puedeDesbloquear = reqs.every(r => aprobados.includes(r));
-
-    // Reglas especiales con créditos para ciertos módulos
-    if (destino === 'modulo1') {
-      puedeDesbloquear = totalCreditos >= 90;
-    }
-    if (destino === 'modulo2') {
-      puedeDesbloquear = aprobados.includes('modulo1') && totalCreditos >= 170;
-    }
-    if (destino === 'internado_electivo' || destino === 'internado_electivo1') {
-      puedeDesbloquear = totalCreditos >= 240;
-    }
+    const puedeDesbloquear = reqs.every(r => aprobados.includes(r));
 
     if (!elem.classList.contains('aprobado')) {
       if (puedeDesbloquear) elem.classList.remove('bloqueado');
       else elem.classList.add('bloqueado');
     } else {
-      // Si está aprobado, no debe estar bloqueado
       elem.classList.remove('bloqueado');
     }
   }
