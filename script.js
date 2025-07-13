@@ -64,12 +64,20 @@ function actualizarDesbloqueos() {
 
     const prereqCumplido = prereqs.every(r => aprobados.includes(r));
 
+    let correqsCumplidosInternamente = true; // Asumimos que los correquisitos se cumplen por default si no hay
     const correqs = correquisitos[ramo] || [];
-    const correqCumplido = correqs.every(r =>
-      aprobados.includes(r) || !document.getElementById(r)?.classList.contains('bloqueado')
-    );
+    
+    // Si hay correquisitos, verificar que los prerrequisitos de esos correquisitos también se cumplan
+    if (correqs.length > 0) {
+      correqsCumplidosInternamente = correqs.every(correqRamo => {
+        const correqPrereqs = prerequisitos[correqRamo] || [];
+        return correqPrereqs.every(p => aprobados.includes(p));
+      });
+    }
 
-    const puedeDesbloquear = prereqCumplido && correqCumplido;
+    // Un ramo puede desbloquearse si sus prerrequisitos están cumplidos
+    // Y, si tiene correquisitos, los prerrequisitos de esos correquisitos también están cumplidos.
+    const puedeDesbloquear = prereqCumplido && correqsCumplidosInternamente;
 
     if (!elem.classList.contains('aprobado')) {
       if (puedeDesbloquear) {
@@ -79,6 +87,7 @@ function actualizarDesbloqueos() {
       }
     } else {
       elem.classList.remove('bloqueado');
+      // Importante: Si ya está aprobado, asegúrate de que no vuelva a bloquearse.
     }
   }
 }
