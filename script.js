@@ -34,6 +34,17 @@ const prerequisitos = {
   obst024: ['obst019', 'obst020', 'obst021', 'obst022']
 };
 
+const correquisitos = {
+  obst008: ['obst007', 'spab112'],
+  spab112: ['obst008'],
+  obst013: ['obst015'],
+  obst015: ['obst013'],
+  obst016: ['obst018'],
+  obst017: ['obst018'],
+  obst018: ['obst016', 'obst017']
+};
+
+
 // Funciones para guardar y cargar progreso en localStorage
 function obtenerAprobados() {
   const data = localStorage.getItem('mallaAprobados');
@@ -44,24 +55,34 @@ function guardarAprobados(aprobados) {
   localStorage.setItem('mallaAprobados', JSON.stringify(aprobados));
 }
 
-// Actualiza qué ramos están desbloqueados o bloqueados según prerrequisitos
 function actualizarDesbloqueos() {
   const aprobados = obtenerAprobados();
 
-  for (const [destino, reqs] of Object.entries(prerequisitos)) {
-    const elem = document.getElementById(destino);
+  for (const [ramo, prereqs] of Object.entries(prerequisitos)) {
+    const elem = document.getElementById(ramo);
     if (!elem) continue;
 
-    const puedeDesbloquear = reqs.every(r => aprobados.includes(r));
+    const prereqCumplido = prereqs.every(r => aprobados.includes(r));
+
+    const correqs = correquisitos[ramo] || [];
+    const correqCumplido = correqs.every(r =>
+      aprobados.includes(r) || !document.getElementById(r)?.classList.contains('bloqueado')
+    );
+
+    const puedeDesbloquear = prereqCumplido && correqCumplido;
 
     if (!elem.classList.contains('aprobado')) {
-      if (puedeDesbloquear) elem.classList.remove('bloqueado');
-      else elem.classList.add('bloqueado');
+      if (puedeDesbloquear) {
+        elem.classList.remove('bloqueado');
+      } else {
+        elem.classList.add('bloqueado');
+      }
     } else {
       elem.classList.remove('bloqueado');
     }
   }
 }
+
 
 // Maneja el clic para aprobar o desaprobar un ramo (solo si no está bloqueado)
 function aprobar(e) {
