@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #fff0f5;
+  background-color: #fce4ec; /* Lighter pink background, soft and inviting */
   margin: 0;
   padding: 20px;
 }
@@ -8,7 +8,7 @@ body {
 h1 {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  color: #c2185b;
+  color: #c2185b; /* Deep pink for heading */
   text-align: center;
   margin-bottom: 40px;
 }
@@ -23,8 +23,8 @@ h1 {
 
 .semestre {
   min-width: 220px;
-  background-color: #ffe4ec;
-  border: 2px solid #f48fb1;
+  background-color: #ffebf0; /* Very light pink for semester containers */
+  border: 2px solid #f8bbd0; /* Soft pink border */
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -32,55 +32,56 @@ h1 {
 
 .semestre h2 {
   text-align: center;
-  color: #ad1457;
+  color: #ad1457; /* Darker pink for semester headings */
   font-size: 1.1em;
   margin-bottom: 12px;
-  border-bottom: 1px solid #f8bbd0;
+  border-bottom: 1px solid #ffdde7; /* Even lighter pink for border bottom */
   padding-bottom: 6px;
 }
 
 .ramo {
-  background: linear-gradient(145deg, #f8bbd0, #ec9fb9);
-  border: 1px solid #c2185b;
+  background: linear-gradient(145deg, #fdced8, #faafbb); /* Gradient using the specified color and a slightly darker pink */
+  border: 1px solid #e91e63; /* Vibrant pink border for interactive elements */
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 10px;
   text-align: center;
   cursor: pointer;
-  color: #880e4f;
+  color: #880e4f; /* Dark reddish-pink for text */
   font-weight: 600;
   /* Sombra para efecto 3D */
-  box-shadow: 4px 4px 8px #c28aa2, -4px -4px 8px #ffcee1;
+  box-shadow: 4px 4px 8px #d6a1b2, -4px -4px 8px #fff0f5; /* Shadows in pinkish tones */
   transition: all 0.3s ease;
   user-select: none;
 }
 
 .ramo:hover {
-  background: linear-gradient(145deg, #f48fb1, #e47c9d);
-  box-shadow: 6px 6px 10px #b67288, -6px -6px 10px #ffbed4;
-  color: #5c0040;
+  background: linear-gradient(145deg, #faafbb, #fdced8); /* Invert gradient on hover for subtle change */
+  box-shadow: 6px 6px 10px #c28a9b, -6px -6px 10px #ffe0ed; /* Deeper shadows on hover */
+  color: #5c0040; /* Even darker pink for hover text */
   transform: translateY(-3px);
 }
 
 .ramo:active {
-  box-shadow: inset 3px 3px 5px #b67288, inset -3px -3px 5px #ffbed4;
+  box-shadow: inset 3px 3px 5px #c28a9b, inset -3px -3px 5px #ffe0ed; /* Inset shadow on active for pressed effect */
   transform: translateY(1px);
 }
 
 .ramo.bloqueado {
-  background-color: #f3f3f3;
-  color: #999;
+  background-color: #fcfcfc; /* Very light, almost white for blocked ramos */
+  color: #b0b0b0; /* Light gray for blocked text */
   border-style: dashed;
+  border-color: #e0e0e0; /* Lighter border for blocked */
   cursor: not-allowed;
-  box-shadow: none;
-  background: none;
+  box-shadow: none; /* No shadow for blocked */
+  background: none; /* No gradient for blocked */
 }
 
 .ramo.aprobado {
-  background: linear-gradient(145deg, #d1bee7, #b695d3) !important;
-  color: #4a148c;
-  border-color: #6a1b9a;
+  background: linear-gradient(145deg, #d8bfd8, #c1a4c1) !important; /* Muted purple/lavender gradient for approved */
+  color: #6a1b9a; /* Dark purple for approved text */
+  border-color: #8e24aa; /* Deeper purple border */
   text-decoration: line-through;
   font-style: italic;
-  box-shadow: 4px 4px 8px #8a69a2, -4px -4px 8px #c6aee1;
+  box-shadow: 4px 4px 8px #9e859e, -4px -4px 8px #e8d0e8; /* Shadows in purple tones for approved */
 }
